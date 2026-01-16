@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/semanggilab/webcore-go v0.1.2
+	github.com/webcore-go/webcore v0.0.1
 )
 
 require (
