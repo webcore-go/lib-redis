@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/webcore-go/webcore/app/config"
 	"github.com/webcore-go/webcore/app/helper"
-	"github.com/webcore-go/webcore/app/logger"
+	"github.com/webcore-go/webcore/infra/config"
+	"github.com/webcore-go/webcore/infra/logger"
 )
 
 // RedisPool manages Redis connection pools

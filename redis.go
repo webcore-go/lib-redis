@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/webcore-go/webcore/app/config"
+	"github.com/webcore-go/webcore/infra/config"
 )
 
 // Redis represents shared Redis connection
