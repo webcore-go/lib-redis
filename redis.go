@@ -2,6 +2,7 @@ package redis
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/webcore-go/webcore/infra/config"
@@ -21,18 +22,6 @@ func NewRedis(config config.RedisConfig) *Redis {
 	})
 
 	return &Redis{Client: client}
-}
-
-// NewRedis creates a new Redis connection
-func OpenRedis(config config.RedisConfig) (*Redis, error) {
-	r := NewRedis(config)
-
-	err := r.Connect()
-	if err != nil {
-		return nil, err
-	}
-
-	return r, nil
 }
 
 func (r *Redis) Install(args ...any) error {
@@ -58,4 +47,21 @@ func (r *Redis) Disconnect() error {
 func (r *Redis) Uninstall() error {
 	// Tidak melakukan apa-apa
 	return nil
+}
+
+func (r *Redis) Set(key string, value any, ttl time.Duration) error {
+	ctx := r.Client.Context()
+	return r.Client.Set(ctx, key, value, ttl).Err()
+}
+
+func (r *Redis) Get(key string) (any, bool) {
+	ctx := r.Client.Context()
+	val, err := r.Client.Get(ctx, key).Result()
+	if err == redis.Nil {
+		return nil, false
+	}
+	if err != nil {
+		return nil, false
+	}
+	return val, true
 }
